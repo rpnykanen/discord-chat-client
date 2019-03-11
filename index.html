@@ -59,9 +59,13 @@ try{
     });
 
     client.on('message', message => {
+
+        if(message.channel.id != config.channel_id) return;
+
         let createdTime = createTime(message.createdTimestamp)
         let text = document.createTextNode(`[${createdTime}] ${message.author.username}: ${message.content}`);
         addMessage(text, ul)
+
     });
 
     sendButton.addEventListener('click', () => {

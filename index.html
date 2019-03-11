@@ -14,8 +14,8 @@
                 </ul>
             </div>
             <form>
-                <input type="text" placeholder="message to channel #heaven">
-                <input type="button" value="send">
+                <input id="chatmessage" type="text" placeholder="message to channel #heaven">
+                <input id="sendButton" type="button" value="send">
             </form>
 
         </div>
@@ -39,6 +39,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const ul = document.getElementById("chatmessages");
+const messageInputfield = document.getElementById("chatmessage");
+const sendButton = document.getElementById("sendButton");
 
 try{
 
@@ -47,28 +49,24 @@ try{
         const channel = client.channels.get(config.channel_id)
         channel.fetchMessages()
             .then( messages => {
-
                 Array.from(messages).reverse().forEach( message => {
-                    console.log(message);
-                    let li = document.createElement("li")
                     let createdTime = createTime(message[1].createdTimestamp)
                     let text = document.createTextNode(`[${createdTime}] ${message[1].author.username}: ${message[1].content}`);
-                    li.append(text);
-                    ul.appendChild(li);
+                    addMessage(text, ul)
                 })
-
-
-            }
-
-            );
-        //channel.send('This message was sent via my awesome api integration');
+            });
 
     });
 
-    //client.on('message', message => {
-        //if(message.author.bot) return;
-    //});
+    client.on('message', message => {
+        let createdTime = createTime(message.createdTimestamp)
+        let text = document.createTextNode(`[${createdTime}] ${message.author.username}: ${message.content}`);
+        addMessage(text, ul)
+    });
 
+    sendButton.addEventListener('click', () => {
+        sendMessage();
+    } );
 
     client.login(config.token);
 
@@ -79,6 +77,18 @@ try{
 const createTime = timestamp => {
     const date = new Date(timestamp)
     return `${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`
+}
+
+const addMessage = (text, chatElement) => {
+    let li = document.createElement("li")
+    li.append(text);
+    chatElement.appendChild(li);
+}
+
+const sendMessage = () => {
+    const message = messageInputfield.value;
+    messageInputfield.value = "";
+    client.channels.get(config.channel_id).send(message);
 }
 
 </script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Discord chat</title>
+</head>
+<body>
+    <div>
+        <h1>Chat</h1>
+        <div>
+            <h2>Messages</h2>
+            <div>
+                <ul id="chatmessages">
+                </ul>
+            </div>
+            <form>
+                <input type="text" placeholder="message to channel #heaven">
+                <input type="button" value="send">
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    ul{
+        max-height: 300px;
+        overflow: auto;
+    }
+    ul li {
+        list-style: none;
+    }
+</style>
+
+<script>
+const config = require("./config.json");
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+const ul = document.getElementById("chatmessages");
+
+try{
+
+    client.on('ready', () => {
+
+        const channel = client.channels.get(config.channel_id)
+        channel.fetchMessages()
+            .then( messages => {
+
+                Array.from(messages).reverse().forEach( message => {
+                    console.log(message);
+                    let li = document.createElement("li")
+                    let createdTime = createTime(message[1].createdTimestamp)
+                    let text = document.createTextNode(`[${createdTime}] ${message[1].author.username}: ${message[1].content}`);
+                    li.append(text);
+                    ul.appendChild(li);
+                })
+
+
+            }
+
+            );
+        //channel.send('This message was sent via my awesome api integration');
+
+    });
+
+    //client.on('message', message => {
+        //if(message.author.bot) return;
+    //});
+
+
+    client.login(config.token);
+
+} catch(e){
+    //console.log(e);
+}
+
+const createTime = timestamp => {
+    const date = new Date(timestamp)
+    return `${date.getHours()}:${(date.getMinutes()<10?'0':'') + date.getMinutes()}`
+}
+
+</script>

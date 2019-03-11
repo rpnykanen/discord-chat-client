@@ -1,0 +1,19 @@
+{
+  "name": "discord-chat",
+  "description": "",
+  "version": "0.0.1",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "electron": "^4.0.8"
+  },
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}

@@ -1,0 +1,10 @@
+.messageInput {
+  font-size: 14px;
+  padding: 5px 3px;
+  min-width: 300px;
+}
+
+.submitButton {
+  font-size: 14px;
+  padding: 10px 3px;
+}

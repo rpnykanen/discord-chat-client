@@ -5,15 +5,15 @@ import MessageList from './components/MessageList'
 
 import css from './ChatScreen.css'
 
-const ChatScreen = ({submitMessage, ...props}) => {
+const ChatScreen = ({submitMessage}) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleKeyPress = (e) => {
     if (e.key !== 'Enter')
       return
 
-    setInputValue('')
     submitMessage(inputValue)
+    setInputValue('')
   }
 
   return (
@@ -23,7 +23,7 @@ const ChatScreen = ({submitMessage, ...props}) => {
             <h2>Messages</h2>
 
             <div>
-              <MessageList {...props}/>
+              <MessageList />
             </div>
 
             <input

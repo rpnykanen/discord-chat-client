@@ -1,44 +1,41 @@
-import React, {useState, useEffect} from 'react'
-import Discord from 'discord.js'
-
+import React, {useEffect, useContext} from 'react'
+import {AppContext} from './util/state'
+import getClient from './util/client'
 import ChatScreen from './chat/ChatScreen'
 
-const config = require("../config.json");
+const client = getClient()
+const config = require("../config.json")
 
 const App = () => {
-  const [messages, setMessages] = useState([])
-  const [client, setClient] = useState(new Discord.Client())
+  const {dispatch} = useContext(AppContext)
 
   useEffect(() => {
-
-    client.login(config.token);
 
     client.on('ready', async () => {
 
       const channel = client.channels.get(config.channel_id)
 
-      const messages = await channel.fetchMessages()
+      const resp = await channel.fetchMessages()
 
-      setMessages(Array.from(messages.values()).reverse())
+      const messages = Array.from(resp.values()).reverse()
+     
+      dispatch({type: 'ADD_MESSAGES', payload: messages})
     })
 
     client.on('message', incomingMessage => {
-      console.log('--------')
-      console.log(messages)
-      console.log(incomingMessage)
-      console.log('--------')
-      setMessages([...messages, incomingMessage])
+      dispatch({type: 'ADD_MESSAGES', payload: [incomingMessage]})
     })
-  }, [])
+  }, [] /* empty diff makes this effect run as componentDidMount only */ )
 
   const submitMessage = (message) => {
     client.channels.get(config.channel_id).send(message);
   }
 
-  return <ChatScreen 
-    submitMessage={submitMessage} 
-    messages={messages}
-  />
+  return (
+    <ChatScreen 
+      submitMessage={submitMessage} 
+    />
+  )
 }
 
 export default App

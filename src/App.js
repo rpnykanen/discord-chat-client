@@ -4,7 +4,7 @@ import getClient from './util/client'
 import ChatScreen from './chat/ChatScreen'
 
 const client = getClient()
-const config = require("../config.json")
+const config = require('../config.json')
 
 const App = () => {
   const {dispatch} = useContext(AppContext)
@@ -28,7 +28,7 @@ const App = () => {
   }, [] /* empty diff makes this effect run as componentDidMount only */ )
 
   const submitMessage = (message) => {
-    client.channels.get(config.channel_id).send(message);
+    client.channels.get(config.channel_id).send(message)
   }
 
   return (

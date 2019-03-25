@@ -8,9 +8,7 @@ const MessageList = () => {
 
   const {state} = useContext(AppContext)
 
-  const messages = state.messages || []
-
-  let previousDay = null
+  const messages = state.messages || []
 
   return <ul className={css.messageList}>
     {messages.map((item, index) => {

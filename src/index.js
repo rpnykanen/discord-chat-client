@@ -9,6 +9,6 @@ ReactDOM.render((
       <App/>
     </ContextProvider>
   </div>
-  ),
-  document.getElementById('root')
+),
+document.getElementById('root')
 )

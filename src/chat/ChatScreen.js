@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import Discord from 'discord.js'
+import React, {useState} from 'react'
 
 import MessageList from './components/MessageList'
 
@@ -18,21 +17,21 @@ const ChatScreen = ({submitMessage}) => {
 
   return (
     <div>
-        <h1>Chat</h1>
+      <h1>Chat</h1>
+      <div>
+        <h2>Messages</h2>
+
         <div>
-            <h2>Messages</h2>
-
-            <div>
-              <MessageList />
-            </div>
-
-            <input
-              className={css.messageInput}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e)}
-            />
+          <MessageList />
         </div>
+
+        <input
+          className={css.messageInput}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyPress={(e) => handleKeyPress(e)}
+        />
+      </div>
     </div>
   )
 }

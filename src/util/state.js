@@ -7,11 +7,9 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_MESSAGES':
-    
-      const messages = [...state.messages, ...action.payload]
       return {
         ...state,
-        messages,
+        messages: [...state.messages, ...action.payload],
       }
   
     default:
@@ -19,12 +17,12 @@ const reducer = (state, action) => {
   }
 }
 
-export const AppContext = React.createContext(initialState);
+export const AppContext = React.createContext(initialState)
 
 export const ContextProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState)
 
-  return <AppContext.Provider value={{ state, dispatch }}>
+  return <AppContext.Provider value={{state, dispatch}}>
     {props.children}
   </AppContext.Provider>
 }

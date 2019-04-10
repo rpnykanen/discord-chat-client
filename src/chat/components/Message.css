@@ -1,0 +1,16 @@
+.messageRow {
+  list-style: none;
+  margin-bottom: 5px;
+} 
+
+.messageRow:last-of-type {
+  margin-bottom: 10px;
+}
+
+.timestamp {
+  margin-right: 5px
+}
+
+.username {
+  margin-right: 10px
+}

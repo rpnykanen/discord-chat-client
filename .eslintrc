@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.8"
+    }
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "array-bracket-spacing": [2, "never"],
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false
+    }],
+    "comma-dangle": [2, "always-multiline"],
+    "eol-last": [2, "always"],
+    "indent": [2, 2, {"SwitchCase":1}],
+    "no-console": 0,
+    "no-multiple-empty-lines": 2,
+    "object-curly-spacing": [2, "never"],
+    "quotes": [2, "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
+    "semi": [2, "never"],
+    "react/display-name": 0,
+    "react/prop-types": 0
+  },
+  "plugins": [
+    "react"
+  ],
+  "globals": {
+    "document": true
+  }
+}

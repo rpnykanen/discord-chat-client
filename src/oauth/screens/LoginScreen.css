@@ -1,0 +1,27 @@
+.loginScreen {
+  position: relative;
+  background-color: #26262b;
+  width: 100%;
+  height: 100vh;
+}
+
+.loginWrap {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  width: 350px;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.loginWrap p,
+.loginWrap button,
+.loginWrap h3 {
+  margin: 15px 0;
+}
+
+.loginWrap button{
+  font-size: 18px;
+}

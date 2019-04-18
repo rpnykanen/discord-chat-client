@@ -1,12 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {HashRouter as Router} from 'react-router-dom'
+
 import {ContextProvider} from './util/state'
-import App from './App'
+import routes from './routes'
 
 ReactDOM.render((
   <div>
     <ContextProvider>
-      <App/>
+      <Router>
+        {routes}
+      </Router>
     </ContextProvider>
   </div>
 ),

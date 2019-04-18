@@ -1,4 +1,10 @@
 {
-  "token": "", //user token
-  "channel_id": ""
+  "token": "",
+  "channel_id": "",
+  "CLIENT_ID": "",
+  "CLIENT_SECRET": "",
+  "OAUTH_SCOPES": "",
+  "APP_URL": "http://localhost",
+  "AUTHORIZE_URL": "https://discordapp.com/api/oauth2/authorize",
+  "TOKEN_URL": "https://discordapp.com/api/oauth2/token"
 }

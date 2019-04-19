@@ -9,12 +9,17 @@ const MessageList = () => {
   const {state} = useContext(AppContext)
 
   const messages = state.messages
-  const users = state.users
 
   return <ul className={css.messageList}>
     {messages.map((item, index) => {
 
-      const {author, content: message} = item
+      const {author, content: message, mentions} = item
+
+      const users = mentions.users.reduce( (acc,user) => {
+        const temp = {}
+        temp[user.id] = user.username
+        return {...acc, ...temp}
+      }, {})
 
       let dayText = ''
 

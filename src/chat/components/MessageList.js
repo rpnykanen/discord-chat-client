@@ -41,13 +41,12 @@ const MessageList = () => {
   </ul>
 }
 
-//TODO: can only find the first occurrence in string for some reason
 const useridToUsername = (message, users) => {
-    const regex = '<@\\d*>';
-    let userids = message.match(regex);
+    const regex = new RegExp('<@\\d*>', 'g');
+    const userids = message.match(regex);
     if( userids != null && userids.length != 0){
         userids.forEach( userid => {
-            message = message.replace(userid, '@'+users[userid.substring(2, userid.length - 1)])
+            message = message.replace(userid, '@'+users[userid.substring(2, (userid.length - 1))])
             }
         )
     }

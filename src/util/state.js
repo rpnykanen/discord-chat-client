@@ -2,6 +2,7 @@ import React, {useReducer} from 'react'
 
 const initialState = {
   messages: [],
+  users: []
 } 
 
 const reducer = (state, action) => {
@@ -11,7 +12,13 @@ const reducer = (state, action) => {
         ...state,
         messages: [...state.messages, ...action.payload],
       }
-  
+
+      case 'ADD_USERS':
+      return {
+        ...state,
+        users: action.payload,
+      }
+
     default:
       return state
   }

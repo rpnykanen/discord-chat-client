@@ -8,12 +8,18 @@ const MessageList = () => {
 
   const {state} = useContext(AppContext)
 
-  const messages = state.messages || []
+  const messages = state.messages
 
   return <ul className={css.messageList}>
     {messages.map((item, index) => {
 
-      const {author, content: message} = item
+      const {author, content: message, mentions} = item
+
+      const users = mentions.users.reduce( (acc,user) => {
+        const temp = {}
+        temp[user.id] = user.username
+        return {...acc, ...temp}
+      }, {})
 
       let dayText = ''
 
@@ -28,16 +34,29 @@ const MessageList = () => {
         const currentDay = new Date(item.createdTimestamp)
         dayText = currentDay.toLocaleDateString()
       }
-
+      const parsedMessage = useridToUsername(message,users)
       return <Message
         key={item.id} 
         header={dayText} 
         timestamp={item.createdTimestamp} 
         username={author.username}>
-        {message}
+        {parsedMessage}
       </Message>
     })}
   </ul>
 }
+
+const useridToUsername = (message, users) => {
+    const regex = new RegExp('<@\\d*>', 'g');
+    const userids = message.match(regex);
+    if( userids != null && userids.length != 0){
+        userids.forEach( userid => {
+            message = message.replace(userid, '@'+users[userid.substring(2, (userid.length - 1))])
+            }
+        )
+    }
+    return message
+}
+
 
 export default MessageList

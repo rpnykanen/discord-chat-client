@@ -15,11 +15,19 @@ const App = () => {
 
       const channel = client.channels.get(config.channel_id)
 
+      const guildMembers = Array.from(channel.guild.members.values())
+      const users = guildMembers.reduce((acc, member) => {
+        const temp = {}
+        temp[member.user.id] = member.user.username
+        return {...acc, ...temp}
+      }, {})
+
       const resp = await channel.fetchMessages()
 
       const messages = Array.from(resp.values()).reverse()
      
       dispatch({type: 'ADD_MESSAGES', payload: messages})
+      dispatch({type: 'ADD_USERS', payload: users})
     })
 
     client.on('message', incomingMessage => {

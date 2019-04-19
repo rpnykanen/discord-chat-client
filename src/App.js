@@ -15,8 +15,7 @@ const App = () => {
 
       const channel = client.channels.get(config.channel_id)
 
-      //TODO: won't return all users
-      const guildMembers = Array.from(channel.members.values())
+      const guildMembers = Array.from(channel.guild.members.values())
       const users = guildMembers.reduce((acc, member) => {
         const temp = {}
         temp[member.user.id] = member.user.username
